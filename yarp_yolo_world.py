@@ -118,6 +118,9 @@ class yoloWDet(yarp.RFModule):
                 for value in box.tolist():
                     bbox_list.addFloat64(value)
 
+                centroid_list = object_bottle.addList()
+                centroid_list.addInt64(int((bbox_list.get(0).asFloat64()+bbox_list.get(2).asFloat64())/2))
+                centroid_list.addInt64(int((bbox_list.get(1).asFloat64()+bbox_list.get(3).asFloat64())/2))
                 label_index = int(labels[i].item())
                 label_name = names[label_index]
                 confidence = float(scores[i].item())
@@ -136,6 +139,9 @@ class yoloWDet(yarp.RFModule):
         out_buf_image.resize(out_image.shape[1], out_image.shape[0])
         out_buf_image.setExternal(out_buf_array.data, out_buf_array.shape[1], out_buf_array.shape[0])
         self.yoloWDet_img_out_port.write()
+
+        self.yoloWDet_dets_port.write()
+
 
 
         return True

@@ -50,6 +50,28 @@ def main():
         else:
             print(f'Could not load image from {pred_path}')
 
+    #################### Change classes
+
+    new_classes = ['parrot', 'glass'] 
+    model.set_classes(new_classes)
+
+    print(model.names)
+
+    # 3. Run prediction
+    print(f'Running prediction on {image_path}')
+    results = model.predict(
+        image_path,
+        conf=confidence_threshold,
+        save_txt=True  # Saves results in runs/detect/predict/labels
+    )
+
+    # 4. Print detections
+    for result in results:
+        print('--- Detected Boxes ---')
+        print(result.boxes)
+
+
+
 
 if __name__ == '__main__':
     main()
