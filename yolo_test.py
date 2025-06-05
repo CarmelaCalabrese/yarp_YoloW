@@ -15,7 +15,8 @@ def main():
     print(f'Loading model: {model_name}')
     model = YOLO(model_name)
 
-    print(model.names)
+
+    model.to('cpu')
 
     # 2. Set the text classes
     print(f'Setting detection classes: {classes}')
