@@ -142,25 +142,25 @@ class yoloWDet(yarp.RFModule):
                     centroid_list.addInt64(v)
 
                   
-                    received_depth = self.yoloWDet_depth_port.read()
+                    # received_depth = self.yoloWDet_depth_port.read()
 
                     coord_list = object_bottle.addList()
                     
-                    if received_depth:
-                        self.in_buf_depth.copy(received_depth) 
-                        self.image_depth = np.copy(self.in_buf_depth_array)
-                        z = self.image_depth[u, v]
+                    # if received_depth:
+                    #     self.in_buf_depth.copy(received_depth) 
+                    #     self.image_depth = np.copy(self.in_buf_depth_array)
+                    #     z = self.image_depth[u, v]
 
-                        min_depth = 0.2
-                        max_depth = 6.0
+                    #     min_depth = 0.2
+                    #     max_depth = 6.0
         
-                        if (z > min_depth and z < max_depth): 
-                            z = int(z / self.depth_factor)
-                            x = int(((v - self.cx) * z) / self.fx)
-                            y = int(((u - self.cy) * z) / self.fy)
-                            coord_list.addInt64(x)
-                            coord_list.addInt64(y)
-                            coord_list.addInt64(z)
+                    #     if (z > min_depth and z < max_depth): 
+                    #         z = int(z / self.depth_factor)
+                    #         x = int(((v - self.cx) * z) / self.fx)
+                    #         y = int(((u - self.cy) * z) / self.fy)
+                    #         coord_list.addInt64(x)
+                    #         coord_list.addInt64(y)
+                    #         coord_list.addInt64(z)
                         
                     label_index = int(labels[i].item())
                     label_name = names[label_index]
